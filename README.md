@@ -191,8 +191,8 @@ SOFTWARE.
 Developer
 
 Milad Moradpour
-GitHub: @yourusername
-Email: your-email@example.com
+GitHub: [@MiladMA87](https://github.com/MiladMA87)
+Email: miladmoradpor.j@gmail.com
 
 
 Happy Coding!!
