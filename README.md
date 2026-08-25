@@ -1,198 +1,510 @@
-MAL IDE v2.0
+# MAL IDE
 
-An Integrated Development Environment (IDE) for the MAL programming language with advanced debugging support
+### A lightweight IDE and interpreter for the MAL programming language
 
+**MAL IDE** is a Python-based development environment built for the **MAL programming language**.
 
-Introduction
+It brings together a custom interpreter, code editor, debugger, syntax highlighting, file management, built-in APIs, and Python integration in a single desktop application.
 
-MAL IDE is a code editor + interpreter + debugger for the MAL language. With this tool, you can write, execute, and debug MAL code line by line.
+The project was created as an exploration of **programming language design, interpreter development, debugging systems, and desktop application development**.
 
+---
 
-Features
+## ✨ Features
 
-- Syntax highlighting (keywords, strings, comments, and numbers)
-- Full debugging (breakpoints, step over/into/out)
-- Real-time variable display during execution
-- Call stack viewer
-- Mix MAL and Python code in one file
-- Light and dark themes
-- File management (open, save, new)
-- Built-in APIs for file, system, directory, and random operations
+### 🧠 MAL Interpreter
 
+MAL includes a custom interpreter implemented in Python.
 
-Installation and Execution
+The language supports:
 
-Prerequisites:
-- Python 3.7 or higher
+* Variables
+* Expressions and operators
+* Functions
+* Return values
+* `if / elif / else`
+* `while` loops
+* `for` loops
+* `break` and `continue`
+* Lists
+* Dictionaries
+* Tuples
+* Sets
+* User input
+* Built-in functions
+* Comments
 
-Run:
-python MAL2.py
+Example:
 
-Note: No additional libraries are needed. Python is all you need.
+```mal
+let numbers = list(1, 2, 3, 4, 5)
+let total = 0
 
+for number from numbers {
+    total = total + number
+}
 
-Quick Start
+print total
+```
 
-1. Run the program
-2. Write the following code in the editor:
+---
+
+## 🛠️ Integrated Development Environment
+
+MAL IDE provides a desktop editor for writing and running MAL programs.
+
+### Editor
+
+* Syntax highlighting
+* Line numbers
+* Automatic indentation
+* Undo / Redo
+* Clipboard operations
+* Current line and column indicator
+* Font customization
+* Light and dark themes
+* File creation and editing
+* Save and open functionality
+
+The editor is designed to keep the development workflow inside a single application instead of requiring a separate editor and interpreter.
+
+---
+
+## 🐞 Debugger
+
+MAL IDE includes an integrated debugger for inspecting program execution.
+
+### Debugging capabilities
+
+* Breakpoints
+* Step Over
+* Step Into
+* Step Out
+* Continue execution
+* Stop execution
+* Current-line highlighting
+* Variable inspection
+* Call stack inspection
+* Debug status information
+* Interactive input handling
+
+Breakpoints can also be managed directly from the editor.
+
+### Debug Commands
+
+MAL provides debugging commands such as:
+
+```mal
+debug breakpoint 10
+debug step
+debug continue
+debug stop
+debug vars
+debug stack
+```
+
+This allows debugging to be controlled both through the IDE interface and from the MAL runtime.
+
+---
+
+# 🧩 Built-in APIs
+
+MAL provides several built-in APIs that extend the language beyond basic computation.
+
+## System API
+
+The `sys` API exposes information about the environment in which MAL is running.
+
+Example:
+
+```mal
+print sys.os
+print sys.cpu
+print sys.python
+print sys.path
+print sys.time()
+print sys.memory()
+```
+
+It provides access to information such as:
+
+* Operating system
+* OS version
+* Platform
+* CPU information
+* Current working directory
+* Home directory
+* Python version
+* Current time
+* Memory information
+
+---
+
+## File API
+
+The `file` API provides file-system operations directly from MAL.
+
+Example:
+
+```mal
+file.create("example.txt", "Hello MAL")
+
+file.append("example.txt", "\nWelcome!")
+
+let content = file.read("example.txt")
+
+print content
+```
+
+Supported operations include:
+
+* Create
+* Read
+* Read lines
+* Write
+* Append
+* Copy
+* Move
+* Rename
+* Delete
+* Existence checking
+* File size
+* File information
+* JSON reading
+* JSON writing
+
+---
+
+## Directory API
+
+The `dir` API provides directory-management functionality.
+
+```mal
+dir.create("data")
+
+let files = dir.list(".")
+print files
+
+dir.change("data")
+```
+
+Operations include:
+
+* Create directories
+* Delete directories
+* List directory contents
+* Change working directory
+* Check existence
+* Copy directories
+* Move directories
+* Generate directory trees
+
+---
+
+## Random API
+
+MAL also includes utilities for generating random values.
+
+```mal
+let number = random.number(1, 100)
+let item = random.choice(list("A", "B", "C"))
+let flag = random.boolean()
+
+print number
+print item
+print flag
+```
+
+Additional functionality includes:
+
+* Random numbers
+* Random choices
+* Boolean values
+* List shuffling
+* RGB generation
+
+---
+
+# 🐍 Python Integration
+
+One of the features of MAL IDE is the ability to combine **MAL and Python code inside the same source file**.
+
+A source file can switch between the two environments using:
+
+```text
+using MAL
+```
+
+and:
+
+```text
+using PYTHON
+```
+
+Example:
+
+```text
+using MAL
+
+let x = 10
+print x
+
+using PYTHON
+
+print("Hello from Python")
 
 using MAL
-let name = "World"
 
-function sayHello(person) {
-    print "Hello " + person
-}
+let y = 20
+print y
+```
 
-sayHello(name)
+This allows Python to be used alongside MAL when functionality is easier to implement or access directly through Python.
 
-3. Press F5 or click the Run button
-4. View the result in the output panel
+Python sections are executed through Python's runtime and their output is integrated into the IDE's output system.
 
+---
 
-MAL Language Guide
+# 📚 MAL Language Examples
 
-Variables:
-let x = 10
-let name = "Ali"
-let numbers = list(1, 2, 3)
-let isOk = true
+## Variables
 
-Functions:
-function add(a, b) {
-    return a + b
-}
+MAL supports multiple variable-assignment forms:
 
-let result = add(5, 3)
-print result
+```mal
+let name = "MAL"
+let version = 2
+var counter = 0
+set result = version + counter
+```
 
-Conditionals:
-let age = 20
+---
 
-if (age < 18) {
-    print "Child"
-} elif (age < 60) {
-    print "Adult"
+## Conditions
+
+```mal
+let score = 85
+
+if score >= 90 {
+    print "Excellent"
+} elif score >= 60 {
+    print "Passed"
 } else {
-    print "Senior"
+    print "Failed"
+}
+```
+
+---
+
+## Functions
+
+```mal
+function greet(name) {
+    print "Hello"
+    print name
 }
 
-Loops:
-# Numeric for loop
+greet("MAL")
+```
+
+---
+
+## Loops
+
+### While
+
+```mal
+let i = 0
+
+while i < 5 {
+    print i
+    i = i + 1
+}
+```
+
+### For
+
+```mal
 for i from 1 to 5 {
     print i
 }
+```
 
-# Iterable for loop
-let items = list("a", "b", "c")
-for item from items {
-    print item
+### Iterating over collections
+
+```mal
+let languages = list("MAL", "Python", "C++")
+
+for language from languages {
+    print language
 }
+```
 
+---
 
+# ⌨️ Keyboard Shortcuts
 
-Built-in APIs
+| Shortcut   | Action            |
+| ---------- | ----------------- |
+| `F5`       | Run               |
+| `F6`       | Stop              |
+| `F9`       | Toggle breakpoint |
+| `F1`       | Open MAL help     |
+| `Ctrl + N` | New file          |
+| `Ctrl + O` | Open file         |
+| `Ctrl + S` | Save              |
+| `Ctrl + Z` | Undo              |
+| `Ctrl + Y` | Redo              |
+| `Ctrl + C` | Copy              |
+| `Ctrl + V` | Paste             |
+| `Ctrl + A` | Select all        |
 
-sys - System information:
-print sys.os        # Operating system information
-print sys.cpu       # CPU information
-print sys.time      # Date and time
-print sys.memory()  # Memory status
+---
 
-file - File operations:
-file.write("test.txt", "My content")
-let content = file.read("test.txt")
-file.append("test.txt", "More content")
-file.copy("src.txt", "dst.txt")
-file.delete("test.txt")
+# 🚀 Installation
 
-dir - Directory operations:
-dir.create("myfolder")
-dir.list(".")        # List files
-dir.tree(".", 2)     # Directory tree
-dir.change("/home")  # Change path
+## Requirements
 
-random - Random operations:
-random.number(1, 100)        # Random number
-random.choice(list(1,2,3))   # Random choice
-random.boolean()             # True or False
-random.rgb()                 # Random RGB color
+* Python **3.7+**
+* Tkinter
+* NumPy
 
+Tkinter is included with most standard Python installations.
+On some Linux distributions, it may need to be installed separately.
 
-Debugging Tools
+### Install NumPy
 
-Buttons:
-🐛 Debug        : Toggle debug mode
-🔴 Breakpoint   : Set breakpoint at current line (or press F9)
-⏭ Step Over    : Execute next line (without entering functions)
-⏬ Step Into    : Enter function
-⏫ Step Out     : Exit function
-▶ Continue      : Continue until next breakpoint
-⏹ Stop         : Stop execution
+```bash
+pip install numpy
+```
 
-Debug commands in code:
-debug breakpoint 10   # Breakpoint at line 10
-debug step            # Activate step mode
-debug continue        # Continue execution
-debug vars            # Show variables
-debug stack           # Show call stack
+---
 
+## Running MAL IDE
 
-Keyboard Shortcuts
+Clone the repository:
 
-F5          : Run code
-F9          : Toggle breakpoint
-F6          : Stop execution
-F1          : Help
-Ctrl+N      : New file
-Ctrl+O      : Open file
-Ctrl+S      : Save file
-Ctrl+Z      : Undo
-Ctrl+Y      : Redo
-Ctrl+C      : Copy
-Ctrl+V      : Paste
-Ctrl+A      : Select all
+```bash
+git clone https://github.com/MiladMA87/MAL-IDE.git
+```
 
+Enter the project directory:
 
-File Structure
+```bash
+cd MAL-IDE
+```
 
-mal-ide/
+Run the IDE:
+
+```bash
+python MAL.py
+```
+
+---
+
+# 📁 Project Structure
+
+```text
+MAL-IDE/
 │
-├── MAL2.py          # Main program file
-└── README.md        # This file (documentation)
+├── MAL.py
+├── Note.txt
+├── README.md
+├── LICENSE
+└── .gitignore
+```
 
+The main implementation is currently contained in:
 
-License
+```text
+MAL.py
+```
 
-This project is released under the MIT License.
+This file contains the core components of the project, including the interpreter, IDE interface, debugger, APIs, editor functionality, and Python integration.
 
-MIT License
+---
 
-Copyright (c) 2024 Milad Moradpour
+# 🧱 Technology Stack
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+MAL IDE is primarily built using:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+| Technology                  | Purpose                           |
+| --------------------------- | --------------------------------- |
+| **Python**                  | Core implementation               |
+| **Tkinter**                 | Desktop user interface            |
+| **NumPy**                   | Numerical functionality           |
+| **AST**                     | Expression parsing and evaluation |
+| **Python Standard Library** | Runtime and system functionality  |
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+---
 
+# 🎯 Project Goals
 
-Developer
+MAL IDE is primarily an experimental and educational project focused on exploring how a programming language and its development environment can be designed from the ground up.
 
-Milad Moradpour
+The project explores several areas:
+
+* Programming language design
+* Lexing and parsing
+* Expression evaluation
+* Interpreter architecture
+* Runtime APIs
+* Debugger implementation
+* Source-code editing
+* Python integration
+* Desktop GUI development
+
+Rather than attempting to replace established development environments, MAL IDE focuses on understanding and experimenting with the components that make a programming language and its IDE work together.
+
+---
+
+# 📌 Current Status
+
+MAL IDE is an actively evolving personal project.
+
+The current implementation already provides a functional environment for writing, executing, and debugging MAL programs, while several parts of the language and IDE architecture remain open to further development.
+
+Potential future improvements include:
+
+* Expanded language syntax
+* More advanced debugging capabilities
+* Improved error reporting
+* Additional standard libraries
+* Better code completion
+* Improved project management
+* More extensive documentation
+* A more modular interpreter architecture
+
+---
+
+# 🤝 Contributing
+
+MAL IDE is currently maintained as a personal project.
+
+Ideas, bug reports, and technical discussions are welcome through the repository's GitHub issues and discussions.
+
+---
+
+# 📄 License
+
+This project is distributed under the **MIT License**.
+
+See [`LICENSE`](LICENSE) for the complete license text.
+
+---
+
+# 👤 Author
+
+**Milad Moradpour**
+
 GitHub: [@MiladMA87](https://github.com/MiladMA87)
-Email: miladmoradpor.j@gmail.com
 
+---
 
-Happy Coding!!
+<div align="center">
+
+### MAL IDE
+
+*A programming language experiment evolving into a development environment.*
+
+</div>
